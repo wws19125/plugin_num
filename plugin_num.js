@@ -1,11 +1,12 @@
 var _plugin_num_target="";
-var _plugin_num;
-			
+var _plugin_num;	
 				function getNum(target)
 				{
 					if(document.getElementById("pluginnumdiv")&&target==_plugin_num_target)return;
 					var num = document.createElement("div");
 					num.id = "pluginnumdiv";
+					target.setAttribute("readOnly","true");
+					target.offsetParent.style.position="relative";
 					target.offsetParent.appendChild(num);
 					var l = target.offsetLeft;
 					var t = target.offsetTop+target.scrollHeight+10;
@@ -23,7 +24,7 @@ var _plugin_num;
 							if(i==11)
 								btn[i].onclick = function(){target.offsetParent.removeChild(num);_plugin_num=undefined;};
 							else
-								btn[i].onclick = function(){target.value = target.value=="0"?this.innerHTML:(target.value+this.innerHTML); };
+								btn[i].onclick = function(){target.value = (parseFloat(target.value)==0||parseFloat(target.value)==NaN)?this.innerHTML:(target.value+this.innerHTML); };
 						//btn[i].setAttribute("class","plugin_key");
 					}
 					_plugin_num = num;
